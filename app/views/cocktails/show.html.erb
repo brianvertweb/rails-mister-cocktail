@@ -1,15 +1,19 @@
-<div class="single-banner" style= "background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://blog.zanui.com.au/wp-content/uploads/2016/08/Cocktail-movie-1988-starring-Tom-Cruise-from-claratsi.wordpress.com_-1050x700.jpg');">
-<h3><%= @cocktail.name %></h3>
+<div class="wrapper">
+  <div class="single-banner" style= "background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://images.pexels.com/photos/372959/pexels-photo-372959.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');">
+
+      <div class="single-banner-text"><%= @cocktail.name %>
+      </div>
+  </div>
+
+  <div class="container">
+    <% @doses.each do |dose| %>
+     <p>Type of Booze: <%= dose.ingredient[:name] %></p>
+     <p>Tell me something: <%= dose.description %></p>
+     <%= link_to "🧨", dose_path(dose), method: :delete  %>
+    <% end %>
+
+
+      <%= link_to "Add An Ingredient", new_cocktail_dose_path(@cocktail.id), class:"btn btn-primary" %> |
+      <%= link_to "Go Back To List", cocktails_path, class:"btn btn-warning" %>
+  </div>
 </div>
-
-<div>
-<% @doses.each do |dose| %>
-
- <p>Booze: <%= dose.ingredient[:name] %></p>
- <p>Tell me something: <%= dose.description %></p>
- <%= link_to "🧨", dose_path(dose), method: :delete  %>
-<% end %>
-</div>
-
-<%= link_to "Add An Ingredient", new_cocktail_dose_path(@cocktail.id), class:"btn btn-primary" %> |
-<%= link_to "Go Back To List", cocktails_path, class:"btn btn-warning" %>
